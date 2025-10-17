@@ -1,8 +1,8 @@
-SNA_LC07
-Tempat latihan SNA #tolong tambahkan kurang, kali, bagi
+TENTANG PROJECT
 
-def penambahan(a,b): total = a+b return total
+Berikut project untuk pembuatan aplikasi internal bagi suatu UMKM. 
 
-def pengurangan(a,b): total = a-b return total
-
-def main(): print(penambahan(10,5)) print(pengutangan(10,5))
+Instruksi Navigasi Repository:
+1. Periksa anda mempunyai akun Github
+1. Pastikan anda membuka ini di Github
+2. 
