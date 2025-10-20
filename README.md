@@ -1,8 +1,15 @@
 ---
 # **Project Title**
 ---
-
 ## **Description**
+---
+## **Table of Contents**
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](
+---
+
 
 Instruksi Navigasi Repository:
 1. Periksa anda mempunyai akun Github
