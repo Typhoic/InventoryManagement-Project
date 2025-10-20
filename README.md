@@ -1,6 +1,6 @@
 TENTANG PROJECT
 
-Berikut project untuk pembuatan aplikasi internal bagi suatu UMKM. 
+## **Description**
 
 Instruksi Navigasi Repository:
 1. Periksa anda mempunyai akun Github
