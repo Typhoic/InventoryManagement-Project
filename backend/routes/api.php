@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\SalesController;
 use App\Http\Controllers\Api\InventoryController;
 use App\Http\Controllers\Api\ItemController;
+use App\Http\Controllers\Api\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,9 @@ Route::apiResource('inventory', InventoryController::class);
 // Items endpoints
 Route::apiResource('items', ItemController::class);
 Route::get('items/low-stock', [ItemController::class, 'lowStock']);
+
+// Product endpoints (availability checks)
+Route::get('products/{id}/can-make', [ProductController::class, 'canMake']);
 
 // Health check
 Route::get('health', function () {
