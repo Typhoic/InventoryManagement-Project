@@ -36,3 +36,6 @@ Route::get('items/low-stock', [ItemController::class, 'lowStock']);
 Route::get('health', function () {
     return response()->json(['status' => 'ok', 'message' => 'Backend is running']);
 });
+
+// Weekly reports: update stock and sold counts
+Route::post('reports/weekly', [\App\Http\Controllers\Api\WeeklyReportController::class, 'store']);
