@@ -40,21 +40,22 @@ class ProductSeeder extends Seeder
 
         // Add ingredients to products (recipe)
         if ($chicken) {
+            // store recipe quantities in grams (base unit)
             $chickenBowl->ingredients()->attach($chicken->id, [
-                'quantity_required' => 0.2, // 200g of chicken per bowl
-                'unit' => 'kg',
+                'quantity_required' => 200, // 200 g of chicken per bowl
+                'unit' => 'g',
             ]);
         }
 
         if ($rice) {
             $chickenBowl->ingredients()->attach($rice->id, [
-                'quantity_required' => 0.3, // 300g of rice per bowl
-                'unit' => 'kg',
+                'quantity_required' => 300, // 300 g of rice per bowl
+                'unit' => 'g',
             ]);
             
             $riceBowl->ingredients()->attach($rice->id, [
-                'quantity_required' => 0.4, // 400g of rice per rice bowl
-                'unit' => 'kg',
+                'quantity_required' => 400, // 400 g of rice per rice bowl
+                'unit' => 'g',
             ]);
         }
     }

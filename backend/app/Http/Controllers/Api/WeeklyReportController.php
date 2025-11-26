@@ -34,6 +34,7 @@ class WeeklyReportController extends Controller
             'ingredient_stock' => 'nullable|array',
             'ingredient_stock.*.ingredient_id' => 'required_with:ingredient_stock|integer|exists:ingredients,id',
             'ingredient_stock.*.quantity_on_hand' => 'required_with:ingredient_stock|numeric|min:0',
+            'ingredient_stock.*.unit' => 'nullable|string',
         ]);
 
         DB::beginTransaction();
@@ -48,11 +49,28 @@ class WeeklyReportController extends Controller
             if (!empty($data['ingredient_stock'])) {
                 foreach ($data['ingredient_stock'] as $is) {
                     $ing = Ingredient::find($is['ingredient_id']);
-                    if ($ing) {
-                        $ing->quantity_on_hand = $is['quantity_on_hand'];
-                        $ing->save();
-                        $updatedIngredients[$ing->id] = $ing->quantity_on_hand;
+                    if (!$ing) continue;
+
+                    $providedQty = $is['quantity_on_hand'];
+                    $providedUnit = strtolower($is['unit'] ?? $ing->unit);
+
+                    // Normalize units: manager may provide kg for solids or L for liquids.
+                    if (in_array($providedUnit, ['kg', 'kgs'])) {
+                        $normalizedQty = $providedQty * 1000; // kg -> g
+                        $normalizedUnit = 'g';
+                    } elseif (in_array($providedUnit, ['l', 'litre', 'liters', 'liter'])) {
+                        $normalizedQty = $providedQty * 1000; // L -> ml
+                        $normalizedUnit = 'ml';
+                    } else {
+                        $normalizedQty = $providedQty;
+                        $normalizedUnit = $providedUnit;
                     }
+
+                    // overwrite current stock with manager-provided snapshot (normalized)
+                    $ing->quantity_on_hand = $normalizedQty;
+                    $ing->unit = $normalizedUnit ?? $ing->unit;
+                    $ing->save();
+                    $updatedIngredients[$ing->id] = $ing->quantity_on_hand;
                 }
             }
 
