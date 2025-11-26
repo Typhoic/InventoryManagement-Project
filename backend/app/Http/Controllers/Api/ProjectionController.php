@@ -173,16 +173,50 @@ class ProjectionController extends Controller
 
         $callback = function () use ($shoppingList) {
             $out = fopen('php://output', 'w');
-            // header
-            fputcsv($out, ['ingredient_id', 'name', 'required_total', 'available', 'need_to_buy', 'unit']);
+            // header (display quantities in kg or liters where applicable)
+            fputcsv($out, ['ingredient_id', 'name', 'required_total_raw', 'available_raw', 'need_to_buy_raw', 'unit', 'required', 'available', 'need_to_buy', 'estimated_cost']);
             foreach ($shoppingList as $row) {
+                $unit = strtolower($row['unit'] ?? '');
+                $required = $row['required_total'];
+                $available = $row['available'];
+                $need = $row['need_to_buy'];
+
+                // Display in kg for grams, liters for ml
+                if ($unit === 'g') {
+                    $displayRequired = round($required / 1000, 3); // kg
+                    $displayAvailable = round($available / 1000, 3);
+                    $displayNeed = round($need / 1000, 3);
+                    $displayUnit = 'kg';
+                } elseif ($unit === 'ml') {
+                    $displayRequired = round($required / 1000, 3); // liters
+                    $displayAvailable = round($available / 1000, 3);
+                    $displayNeed = round($need / 1000, 3);
+                    $displayUnit = 'L';
+                } else {
+                    // leave raw values for pcs, bottle, etc.
+                    $displayRequired = $required;
+                    $displayAvailable = $available;
+                    $displayNeed = $need;
+                    $displayUnit = $row['unit'];
+                }
+
+                // estimate cost: use ingredient unit_price if available (assumed per base unit stored)
+                // Note: for 'g' unit_price expected per gram; for 'ml' per ml; for pieces/bottle per-piece.
+                $ingredientModel = \App\Models\Ingredient::find($row['ingredient_id']);
+                $unitPrice = $ingredientModel ? (float) $ingredientModel->unit_price : 0.0;
+                $estimatedCost = $unitPrice * $need; // cost in currency units
+
                 fputcsv($out, [
                     $row['ingredient_id'],
                     $row['name'],
-                    $row['required_total'],
-                    $row['available'],
-                    $row['need_to_buy'],
+                    $required,
+                    $available,
+                    $need,
                     $row['unit'],
+                    $displayRequired,
+                    $displayAvailable,
+                    $displayNeed,
+                    number_format($estimatedCost, 2, '.', ''),
                 ]);
             }
             fclose($out);
