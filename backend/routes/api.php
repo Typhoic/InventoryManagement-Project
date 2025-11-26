@@ -49,3 +49,8 @@ Route::post('reports/weekly', [\App\Http\Controllers\Api\WeeklyReportController:
 Route::get('projections/weekly', [ProjectionController::class, 'weekly']);
 Route::post('shopping-list', [ProjectionController::class, 'shoppingList']);
 Route::get('shopping-list/csv', [ProjectionController::class, 'shoppingListCsv']);
+
+// Chart data endpoints
+Route::get('charts/daily-sales', [\App\Http\Controllers\Api\ChartController::class, 'dailySales']);
+Route::get('charts/weekly-sales', [\App\Http\Controllers\Api\ChartController::class, 'weeklySales']);
+Route::get('charts/product-mix', [\App\Http\Controllers\Api\ChartController::class, 'productMix']);

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Charts - Inventory Management</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .chart-container {
+            background: white;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .chart-container h2 {
+            margin-top: 0;
+            color: #555;
+            font-size: 18px;
+        }
+        canvas {
+            max-height: 400px;
+        }
+        .error {
+            color: red;
+            padding: 10px;
+            background-color: #ffe0e0;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .loading {
+            text-align: center;
+            color: #999;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Sales Dashboard</h1>
+        
+        <div class="chart-container">
+            <h2>Daily Sales (Last 7 Days)</h2>
+            <div id="dailySalesError" class="error" style="display: none;"></div>
+            <div id="dailySalesLoading" class="loading">Loading...</div>
+            <canvas id="dailySalesChart" style="display: none;"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <h2>Weekly Sales (Last 8 Weeks)</h2>
+            <div id="weeklySalesError" class="error" style="display: none;"></div>
+            <div id="weeklySalesLoading" class="loading">Loading...</div>
+            <canvas id="weeklySalesChart" style="display: none;"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <h2>Top 5 Products (Last 4 Weeks)</h2>
+            <div id="productMixError" class="error" style="display: none;"></div>
+            <div id="productMixLoading" class="loading">Loading...</div>
+            <canvas id="productMixChart" style="display: none;"></canvas>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = '/backend/public/api'; // adjust if backend runs on different path or port
+
+        async function fetchChartData(endpoint) {
+            try {
+                const res = await fetch(`${API_BASE}${endpoint}`);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                return await res.json();
+            } catch (e) {
+                console.error(`Error fetching ${endpoint}:`, e);
+                throw e;
+            }
+        }
+
+        async function renderDailySalesChart() {
+            try {
+                const data = await fetchChartData('/charts/daily-sales');
+                document.getElementById('dailySalesLoading').style.display = 'none';
+                document.getElementById('dailySalesChart').style.display = 'block';
+
+                new Chart(document.getElementById('dailySalesChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: data.labels || [],
+                        datasets: [
+                            {
+                                label: 'Sales Amount (₱)',
+                                data: data.data || [],
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                borderWidth: 2,
+                                yAxisID: 'y'
+                            },
+                            {
+                                label: 'Units Sold',
+                                data: data.units || [],
+                                borderColor: 'rgba(153, 102, 255, 1)',
+                                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                                borderWidth: 2,
+                                yAxisID: 'y1'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        interaction: { mode: 'index', intersect: false },
+                        scales: {
+                            y: {
+                                type: 'linear',
+                                display: true,
+                                position: 'left',
+                                title: { display: true, text: 'Sales (₱)' }
+                            },
+                            y1: {
+                                type: 'linear',
+                                display: true,
+                                position: 'right',
+                                title: { display: true, text: 'Units' },
+                                grid: { drawOnChartArea: false }
+                            }
+                        }
+                    }
+                });
+            } catch (e) {
+                document.getElementById('dailySalesLoading').style.display = 'none';
+                document.getElementById('dailySalesError').textContent = `Error: ${e.message}`;
+                document.getElementById('dailySalesError').style.display = 'block';
+            }
+        }
+
+        async function renderWeeklySalesChart() {
+            try {
+                const data = await fetchChartData('/charts/weekly-sales');
+                document.getElementById('weeklySalesLoading').style.display = 'none';
+                document.getElementById('weeklySalesChart').style.display = 'block';
+
+                new Chart(document.getElementById('weeklySalesChart'), {
+                    type: 'line',
+                    data: {
+                        labels: data.labels || [],
+                        datasets: [{
+                            label: 'Weekly Revenue (₱)',
+                            data: data.data || [],
+                            borderColor: 'rgba(255, 159, 64, 1)',
+                            backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: true, position: 'top' } },
+                        scales: {
+                            y: { beginAtZero: true, title: { display: true, text: 'Revenue (₱)' } }
+                        }
+                    }
+                });
+            } catch (e) {
+                document.getElementById('weeklySalesLoading').style.display = 'none';
+                document.getElementById('weeklySalesError').textContent = `Error: ${e.message}`;
+                document.getElementById('weeklySalesError').style.display = 'block';
+            }
+        }
+
+        async function renderProductMixChart() {
+            try {
+                const data = await fetchChartData('/charts/product-mix');
+                document.getElementById('productMixLoading').style.display = 'none';
+                document.getElementById('productMixChart').style.display = 'block';
+
+                new Chart(document.getElementById('productMixChart'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: data.labels || [],
+                        datasets: [{
+                            data: data.data || [],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.7)',
+                                'rgba(54, 162, 235, 0.7)',
+                                'rgba(255, 206, 86, 0.7)',
+                                'rgba(75, 192, 192, 0.7)',
+                                'rgba(153, 102, 255, 0.7)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)'
+                            ],
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: true, position: 'bottom' } }
+                    }
+                });
+            } catch (e) {
+                document.getElementById('productMixLoading').style.display = 'none';
+                document.getElementById('productMixError').textContent = `Error: ${e.message}`;
+                document.getElementById('productMixError').style.display = 'block';
+            }
+        }
+
+        // Render all charts on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderDailySalesChart();
+            renderWeeklySalesChart();
+            renderProductMixChart();
+        });
+    </script>
+</body>
+</html>
