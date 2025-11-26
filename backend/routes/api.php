@@ -48,3 +48,4 @@ Route::post('reports/weekly', [\App\Http\Controllers\Api\WeeklyReportController:
 // Projections and shopping list
 Route::get('projections/weekly', [ProjectionController::class, 'weekly']);
 Route::post('shopping-list', [ProjectionController::class, 'shoppingList']);
+Route::get('shopping-list/csv', [ProjectionController::class, 'shoppingListCsv']);

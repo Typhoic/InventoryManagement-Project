@@ -114,4 +114,82 @@ class ProjectionController extends Controller
 
         return response()->json(['target_weeks' => $targetWeeks, 'shopping_list' => $shoppingList]);
     }
+
+    /**
+     * Export shopping list as CSV. Query param: ?target_weeks=1
+     */
+    public function shoppingListCsv(Request $request)
+    {
+        $data = $request->validate([
+            'target_weeks' => 'nullable|integer|min:1',
+        ]);
+        $targetWeeks = $data['target_weeks'] ?? 1;
+
+        // reuse shopping list computation
+        $averages = WeeklyReportItem::select('product_id', DB::raw('AVG(quantity) as avg_qty'))
+            ->groupBy('product_id')
+            ->pluck('avg_qty', 'product_id')
+            ->toArray();
+
+        $products = Product::with('ingredients')->get();
+        $neededByIngredient = [];
+
+        foreach ($products as $p) {
+            $avg = isset($averages[$p->id]) ? (float) $averages[$p->id] : 0.0;
+            $expectedUnits = ceil($avg * $targetWeeks);
+            if ($expectedUnits <= 0) continue;
+
+            foreach ($p->ingredients as $ing) {
+                $reqPerUnit = (float) $ing->pivot->quantity_required;
+                $totalReq = $reqPerUnit * $expectedUnits;
+                if (!isset($neededByIngredient[$ing->id])) {
+                    $neededByIngredient[$ing->id] = [
+                        'ingredient_id' => $ing->id,
+                        'name' => $ing->name,
+                        'required_total' => 0.0,
+                        'available' => (float) $ing->quantity_on_hand,
+                        'unit' => $ing->unit,
+                    ];
+                }
+                $neededByIngredient[$ing->id]['required_total'] += $totalReq;
+            }
+        }
+
+        $shoppingList = [];
+        foreach ($neededByIngredient as $ing) {
+            $needToBuy = max(0, $ing['required_total'] - $ing['available']);
+            if ($needToBuy <= 0) continue;
+            $shoppingList[] = [
+                'ingredient_id' => $ing['ingredient_id'],
+                'name' => $ing['name'],
+                'need_to_buy' => $needToBuy,
+                'unit' => $ing['unit'],
+                'required_total' => $ing['required_total'],
+                'available' => $ing['available'],
+            ];
+        }
+
+        $filename = 'shopping-list-' . date('Ymd') . '.csv';
+
+        $callback = function () use ($shoppingList) {
+            $out = fopen('php://output', 'w');
+            // header
+            fputcsv($out, ['ingredient_id', 'name', 'required_total', 'available', 'need_to_buy', 'unit']);
+            foreach ($shoppingList as $row) {
+                fputcsv($out, [
+                    $row['ingredient_id'],
+                    $row['name'],
+                    $row['required_total'],
+                    $row['available'],
+                    $row['need_to_buy'],
+                    $row['unit'],
+                ]);
+            }
+            fclose($out);
+        };
+
+        return response()->streamDownload($callback, $filename, [
+            'Content-Type' => 'text/csv',
+        ]);
+    }
 }
