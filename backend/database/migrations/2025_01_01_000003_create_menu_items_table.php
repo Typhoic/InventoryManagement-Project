@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('menu_items', function (Blueprint $table) {
+        // Products table (menu items - Chicken Bowl, Rice Bowl, etc.)
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('menu_name');
-            $table->decimal('price', 15, 2);
-            $table->string('category')->nullable();
+            $table->string('name'); // e.g., "Chicken Bowl", "Rice Bowl"
+            $table->text('description')->nullable();
+            $table->decimal('base_price', 10, 2); // base price without toppings
+            $table->string('category')->nullable(); // e.g., "Bowl"
             $table->string('image_url')->nullable();
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('menu_items');
+        Schema::dropIfExists('products');
     }
 };

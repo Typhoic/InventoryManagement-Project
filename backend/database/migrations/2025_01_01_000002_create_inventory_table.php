@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('inventory', function (Blueprint $table) {
+        // Ingredients table (chicken, rice, sauce, etc.)
+        Schema::create('ingredients', function (Blueprint $table) {
             $table->id();
-            $table->string('item_name');
-            $table->integer('quantity_on_hand')->default(0);
-            $table->integer('reorder_level')->default(10);
-            $table->decimal('unit_price', 15, 2)->default(0);
-            $table->string('category')->nullable();
+            $table->string('name'); // e.g., "Chicken Breast", "Rice", "Spicy Sauce"
+            $table->decimal('quantity_on_hand', 10, 2)->default(0); // current stock
+            $table->decimal('reorder_level', 10, 2)->default(10); // alert when below this
+            $table->decimal('unit_price', 10, 2)->default(0); // cost per unit
+            $table->string('unit'); // e.g., "kg", "liter", "pcs", "bottle"
+            $table->string('category')->nullable(); // e.g., "Protein", "Grain", "Sauce", "Seasoning"
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('inventory');
+        Schema::dropIfExists('ingredients');
     }
 };
