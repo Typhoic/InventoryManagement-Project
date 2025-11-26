@@ -1,0 +1,13 @@
+{
+  "week_start": "2025-11-24",
+  "sold_counts": [
+    { "product_id": 1, "quantity": 120 },
+    { "product_id": 2, "quantity": 45 }
+  ],
+  "total_income": 3750000,
+  "ingredient_stock": [
+    { "ingredient_id": 1, "quantity_on_hand": 15, "unit": "kg" },
+    { "ingredient_id": 2, "quantity_on_hand": 20, "unit": "kg" },
+    { "ingredient_id": 3, "quantity_on_hand": 3, "unit": "bottle" }
+  ]
+}
