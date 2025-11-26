@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\SalesController;
 use App\Http\Controllers\Api\InventoryController;
 use App\Http\Controllers\Api\ItemController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\ProjectionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,3 +44,7 @@ Route::get('health', function () {
 
 // Weekly reports: update stock and sold counts
 Route::post('reports/weekly', [\App\Http\Controllers\Api\WeeklyReportController::class, 'store']);
+
+// Projections and shopping list
+Route::get('projections/weekly', [ProjectionController::class, 'weekly']);
+Route::post('shopping-list', [ProjectionController::class, 'shoppingList']);
