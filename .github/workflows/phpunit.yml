@@ -1,0 +1,75 @@
+name: CI - Backend PHP Tests
+
+on:
+  push:
+    branches: [ backend ]
+  pull_request:
+    branches: [ backend ]
+
+jobs:
+  phpunit:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: mbstring, pdo_mysql, gd, xml
+          coverage: none
+
+      - name: Validate composer
+        run: composer --version
+
+      - name: Get composer cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: composer install --no-progress --no-suggest --prefer-dist
+
+      - name: Prepare .env
+        run: |
+          cp backend/.env.example backend/.env
+          echo "DB_CONNECTION=mysql" >> backend/.env
+          echo "DB_HOST=127.0.0.1" >> backend/.env
+          echo "DB_PORT=3306" >> backend/.env
+          echo "DB_DATABASE=inventory" >> backend/.env
+          echo "DB_USERNAME=root" >> backend/.env
+          echo "DB_PASSWORD=root" >> backend/.env
+
+      - name: Wait for MySQL
+        run: |
+          for i in `seq 1 30`; do
+            mysqladmin ping -h 127.0.0.1 -uroot -proot && break || sleep 1
+          done
+
+      - name: Create database
+        run: |
+          mysql -h 127.0.0.1 -uroot -proot -e "CREATE DATABASE IF NOT EXISTS inventory CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+
+      - name: Run migrations
+        working-directory: backend
+        run: |
+          php artisan key:generate
+          php artisan migrate --force
+
+      - name: Run tests
+        working-directory: backend
+        run: php artisan test --no-interaction --verbose
