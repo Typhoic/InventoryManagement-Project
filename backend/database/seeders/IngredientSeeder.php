@@ -2,24 +2,20 @@
 
 namespace Database\Seeders;
 
-use App\Models\Ingredient;
 use Illuminate\Database\Seeder;
+use App\Models\Ingredient;
 
 class IngredientSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
         $ingredients = [
-            // Main proteins/grains for bowls
-            ['name' => 'Chicken Breast', 'quantity_on_hand' => 15, 'reorder_level' => 5, 'unit_price' => 8000, 'unit' => 'kg', 'category' => 'Protein'],
-            ['name' => 'Rice', 'quantity_on_hand' => 20, 'reorder_level' => 8, 'unit_price' => 5000, 'unit' => 'kg', 'category' => 'Grain'],
-            
-            // Sauces (will add more variants later)
-            ['name' => 'Spicy Sauce', 'quantity_on_hand' => 3, 'reorder_level' => 1.5, 'unit_price' => 2500, 'unit' => 'bottle', 'category' => 'Sauce'],
-            ['name' => 'Sweet Sauce', 'quantity_on_hand' => 2.5, 'reorder_level' => 1, 'unit_price' => 2500, 'unit' => 'bottle', 'category' => 'Sauce'],
+            ['name' => 'Chicken', 'initial_stock' => 5000, 'current_stock' => 5000, 'unit' => 'gram', 'low_stock_threshold' => 30],
+            ['name' => 'Rice', 'initial_stock' => 10000, 'current_stock' => 10000, 'unit' => 'gram', 'low_stock_threshold' => 30],
+            ['name' => 'Cheese', 'initial_stock' => 2000, 'current_stock' => 2000, 'unit' => 'gram', 'low_stock_threshold' => 30],
+            ['name' => 'Salt', 'initial_stock' => 1000, 'current_stock' => 1000, 'unit' => 'gram', 'low_stock_threshold' => 30],
+            ['name' => 'Pepper', 'initial_stock' => 500, 'current_stock' => 500, 'unit' => 'gram', 'low_stock_threshold' => 30],
+            ['name' => 'Paprika Powder', 'initial_stock' => 500, 'current_stock' => 500, 'unit' => 'gram', 'low_stock_threshold' => 30],
         ];
 
         foreach ($ingredients as $ingredient) {
