@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('weekly_reports', function (Blueprint $table) {
+        Schema::create('ingredient_group_items', function (Blueprint $table) {
             $table->id();
-            $table->date('week_start');
-            $table->decimal('total_income', 14, 2)->default(0);
-            $table->text('notes')->nullable();
+            $table->foreignId('ingredient_group_id')->constrained('ingredient_groups')->onDelete('cascade');
+            $table->foreignId('ingredient_id')->constrained('ingredients')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('weekly_reports');
+        Schema::dropIfExists('ingredient_group_items');
     }
 };
