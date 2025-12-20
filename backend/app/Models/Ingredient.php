@@ -2,43 +2,41 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Ingredient extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
-        'name',
-        'quantity_on_hand',
-        'reorder_level',
-        'unit_price',
-        'unit',
-        'category',
+        'name', 
+        'initial_stock', 
+        'current_stock', 
+        'unit', 
+        'low_stock_threshold'
     ];
 
-    protected $casts = [
-        'quantity_on_hand' => 'decimal:2',
-        'reorder_level' => 'decimal:2',
-        'unit_price' => 'decimal:2',
-    ];
-
-    /**
-     * Products that use this ingredient (recipe)
-     */
-    public function products(): BelongsToMany
+    public function groups()
     {
-        return $this->belongsToMany(Product::class, 'product_ingredients')
-            ->withPivot('quantity_required', 'unit');
+        return $this->belongsToMany(IngredientGroup::class, 'ingredient_group_items');
     }
 
-    /**
-     * Check if this ingredient is low on stock
-     */
-    public function isLowStock(): bool
+    public function menuItems()
     {
-        return $this->quantity_on_hand < $this->reorder_level;
+        return $this->belongsToMany(MenuItem::class, 'menu_item_ingredients')
+            ->withPivot('quantity_used')
+            ->withTimestamps();
+    }
+
+    // Check if ingredient is low stock
+    public function isLowStock()
+    {
+        $percentageRemaining = ($this->current_stock / $this->initial_stock) * 100;
+        return $percentageRemaining <= $this->low_stock_threshold;
+    }
+
+    // Get percentage remaining
+    public function getStockPercentage()
+    {
+        if ($this->initial_stock == 0) return 0;
+        return ($this->current_stock / $this->initial_stock) * 100;
     }
 }
