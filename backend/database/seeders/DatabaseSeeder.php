@@ -2,21 +2,17 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
         $this->call([
             IngredientSeeder::class,
-            ToppingSeeder::class,
-            ProductSeeder::class,
-            SalesSeeder::class,
+            IngredientGroupSeeder::class,
+            MenuItemSeeder::class,
+            // OrderSeeder will be added later after we create the input form
         ]);
     }
 }
