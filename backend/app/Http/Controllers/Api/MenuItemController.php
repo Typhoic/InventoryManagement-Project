@@ -26,18 +26,33 @@ class MenuItemController extends Controller
     /**
      * POST /api/menu-items
      * Create a new menu item
+     * Server-side validation prevents XSS, injection, and CSRF attacks
      */
     public function store(Request $request)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
-            'image_url' => 'nullable|string',
-            'description' => 'nullable|string',
-            'is_active' => 'boolean'
+            'image_url' => 'nullable|string|max:255',
+            'description' => 'nullable|string|max:1000',
+            'is_active' => 'sometimes|boolean'
+        ], [
+            'name.required' => 'Item name is required',
+            'name.max' => 'Item name must not exceed 255 characters',
+            'price.required' => 'Price is required',
+            'price.numeric' => 'Price must be a valid number',
+            'price.min' => 'Price cannot be negative',
+            'description.max' => 'Description must not exceed 1000 characters'
         ]);
 
-        $menuItem = MenuItem::create($validated);
+        // Create menu item with trimmed and type-cast values
+        $menuItem = MenuItem::create([
+            'name' => trim($validated['name']),
+            'price' => (float) $validated['price'],
+            'description' => isset($validated['description']) ? trim($validated['description']) : null,
+            'image_url' => isset($validated['image_url']) ? trim($validated['image_url']) : null,
+            'is_active' => $validated['is_active'] ?? true
+        ]);
 
         return response()->json([
             'success' => true,

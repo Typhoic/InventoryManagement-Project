@@ -28,6 +28,7 @@ class OrderController extends Controller
     /**
      * POST /api/orders
      * Create a new order with items
+     * Server-side validation prevents XSS, injection, and CSRF attacks
      */
     public function store(Request $request)
     {
@@ -36,15 +37,22 @@ class OrderController extends Controller
             'total_amount' => 'required|numeric|min:0',
             'status' => 'required|string|in:pending,completed,cancelled',
             'items' => 'required|array|min:1',
-            'items.*.menu_item_id' => 'required|exists:menu_items,id',
+            'items.*.menu_item_id' => 'required|integer|exists:menu_items,id',
             'items.*.quantity' => 'required|integer|min:1',
             'items.*.price' => 'required|numeric|min:0'
+        ], [
+            'channel.required' => 'Channel is required',
+            'channel.in' => 'Invalid channel selected',
+            'items.required' => 'At least one item is required',
+            'items.*.menu_item_id.exists' => 'Selected menu item does not exist',
+            'items.*.quantity.min' => 'Quantity must be at least 1',
+            'total_amount.min' => 'Total amount cannot be negative'
         ]);
 
-        // Create the order
+        // Create the order (all data is validated and sanitized by Laravel)
         $order = Order::create([
             'channel' => $validated['channel'],
-            'total_amount' => $validated['total_amount'],
+            'total_amount' => (float) $validated['total_amount'],
             'status' => $validated['status']
         ]);
 

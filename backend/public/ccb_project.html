@@ -3,38 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cal's Chicken Bowl - Stock Management</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manjari:wght@400;700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="styles/general.css">
-    <link rel="stylesheet" href="styles/header.css">
-    <link rel="stylesheet" href="styles/welcome_section.css">
-    <link rel="stylesheet" href="styles/sales_order.css">
-    <script>const API_BASE = 'http://127.0.0.1:8000/api';</script>
-    <script src="frontend/js/dashboard.js" defer></script>
-
-
+    <title>Cal's Chicken Bowl - Dashboard (served)</title>
+    <link rel="stylesheet" href="/styles/general.css">
+    <link rel="stylesheet" href="/styles/header.css">
+    <link rel="stylesheet" href="/styles/welcome_section.css">
+    <link rel="stylesheet" href="/styles/sales_order.css">
+    <script>const API_BASE = location.origin + '/api';</script>
+    <script src="/js/dashboard.js" defer></script>
 </head>
 <body>
-    <!-- Header Section (Judul Web & tempat Sign In)-->
     <header class="header">
         <div class="leftsection">
-            <img class="logoheader" src="images/ccb_logo_notext.svg">
+            <img class="logoheader" src="/images/ccb_logo_notext.svg">
         </div>
     </header>
-    
-    <main>
-        <!-- Welcome admin Section -->
+    <main style="margin-top:0;padding:20px">
         <div class="welcome_admin">
             <h1>Hello, Admin</h1>
             <p>Cal's Chicken Bowl Owner</p>
         </div>
-
-        <!-- Dashboard Widgets -->
-        <section class="dashboard-widgets" style="display:flex;gap:24px;flex-wrap:wrap;">
+        <section class="dashboard-widgets" style="display:flex;gap:24px;flex-wrap:wrap;margin-top:120px;">
             <div class="widget sales-summary" style="flex:1;min-width:260px;background:#fff;border-radius:8px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,0.06);">
                 <h3>Sales Order</h3>
                 <div style="display:flex;justify-content:space-between;align-items:center;">
@@ -50,7 +38,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="widget item-details" style="flex:1;min-width:260px;background:#fff;border-radius:8px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,0.06);">
                 <h3>Item Details</h3>
                 <div style="display:flex;justify-content:space-between;align-items:center;">
@@ -68,7 +55,6 @@
                 </div>
             </div>
         </section>
-
     </main>
 </body>
 </html>
