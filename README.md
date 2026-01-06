@@ -2,7 +2,7 @@
 
 A comprehensive web-based inventory management application built with **Laravel 11** and **Blade templating**. This system is designed to help restaurants and cafes efficiently manage their menu items, ingredients, inventory levels, and orders.
 
-## 🎯 Features
+## Features
 
 ### Dashboard
 - **Overview Dashboard**: Get a quick snapshot of your business metrics
@@ -37,7 +37,7 @@ A comprehensive web-based inventory management application built with **Laravel 
 - **Professional Styling**: Modern CSS styling for a polished look
 - **Data Visualization**: Charts and summaries for quick insights
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Framework**: Laravel 11
 - **Database**: MySQL/SQLite
@@ -45,7 +45,7 @@ A comprehensive web-based inventory management application built with **Laravel 
 - **Build Tool**: Vite
 - **PHP Version**: 8.2+
 
-## 📦 Installation
+## Installation
 
 ### Prerequisites
 - PHP 8.2 or higher
