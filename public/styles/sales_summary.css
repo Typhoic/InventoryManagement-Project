@@ -1,0 +1,93 @@
+.sales-summary-container {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(126, 126, 126, 0.2);
+    background-color: #ffffff;
+    font-family: "Manjari", sans-serif;
+}
+
+.sales-summary-header {
+    background-color: #f3f3f3;
+    padding: 16px 8px;
+    position: relative;
+}
+
+.sales-summary-header h2 {
+    margin: 0;
+    font-family: "Manjari", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: #000000;
+}
+
+.filter-buttons-ss {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 6px;
+}
+
+.filter-btn-ss {
+    padding: 4px 12px;
+    border: 1px solid #d0d0d0;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #5a5a5a;
+    font-family: "Manjari", sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.filter-btn-ss:hover {
+    background-color: #f0f8ff;
+    border-color: #4a90e2;
+}
+
+.filter-btn-ss.active {
+    background-color: #4a90e2;
+    color: #ffffff;
+    border-color: #4a90e2;
+}
+
+.sales-summary-content {
+    display: flex;
+    padding: 20px;
+    gap: 30px;
+    align-items: center;
+}
+
+.chart-wrapper {
+    flex: 2;
+    height: 180px;
+}
+
+.total-sales-box {
+    flex: 1;
+    background: rgba(52, 152, 219, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.total-label {
+    font-family: "Manjari", sans-serif;
+    font-size: 12px;
+    color: #666;
+}
+
+.total-value {
+    font-family: "Manjari", sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #000000;
+}

@@ -1,0 +1,432 @@
+/* Page Title Section */
+.page-title-section {
+    background-color: #F3F3F3;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 55px;
+    border-bottom: 1px solid rgba(126, 126, 126, 0.2);
+}
+
+.page-title-section h1 {
+    font-family: "Manjari", sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    margin: 0;
+    color: #000000;
+}
+
+.page-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Filter Wrapper */
+.filter-wrapper {
+    position: relative;
+}
+
+.filter-btn-page {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    border: 1px solid #d0d0d0;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #5a5a5a;
+    font-family: "Manjari", sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-btn-page:hover {
+    background-color: #f0f8ff;
+    border-color: #4a90e2;
+}
+
+.filter-badge {
+    color: #4a90e2;
+    font-size: 8px;
+}
+
+.filter-arrow {
+    font-size: 8px;
+    color: #999999;
+}
+
+/* Filter Dropdown */
+.filter-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    width: 250px;
+    background-color: #ffffff;
+    border: 1px solid #d0d0d0;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+}
+
+.filter-dropdown.show {
+    display: block;
+}
+
+.filter-section {
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(126, 126, 126, 0.1);
+}
+
+.filter-section:last-of-type {
+    border-bottom: none;
+}
+
+.filter-section-title {
+    display: block;
+    font-family: "Manjari", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: #999999;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.filter-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 0;
+    cursor: pointer;
+}
+
+.filter-option input[type="radio"] {
+    accent-color: #4a90e2;
+}
+
+.filter-option span {
+    font-family: "Manjari", sans-serif;
+    font-size: 12px;
+    color: #333333;
+}
+
+.filter-option:hover span {
+    color: #4a90e2;
+}
+
+/* Filter Dropdown Actions */
+.filter-dropdown-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 15px;
+    background-color: #f9f9f9;
+    border-top: 1px solid rgba(126, 126, 126, 0.1);
+    border-radius: 0 0 8px 8px;
+}
+
+.filter-reset-btn {
+    padding: 6px 15px;
+    border: none;
+    background: none;
+    color: #999999;
+    font-family: "Manjari", sans-serif;
+    font-size: 12px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.filter-reset-btn:hover {
+    color: #e74c3c;
+}
+
+.filter-apply-btn {
+    padding: 6px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4a90e2;
+    color: #ffffff;
+    font-family: "Manjari", sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-apply-btn:hover {
+    background-color: #3a7bc8;
+}
+
+/* Active Filters */
+.active-filters {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 30px;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid rgba(126, 126, 126, 0.1);
+}
+
+.active-filters-label {
+    font-family: "Manjari", sans-serif;
+    font-size: 12px;
+    color: #999999;
+}
+
+.active-filter-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background-color: #e8f4ff;
+    border-radius: 15px;
+    font-family: "Manjari", sans-serif;
+    font-size: 11px;
+    color: #4a90e2;
+}
+
+.remove-filter {
+    color: #999999;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1;
+}
+
+.remove-filter:hover {
+    color: #e74c3c;
+}
+
+.new-btn {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4a90e2;
+    color: #ffffff;
+    font-family: "Manjari", sans-serif;
+    font-size: 12px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.new-btn:hover {
+    background-color: #3a7bc8;
+}
+
+/* Table Container */
+.table-container {
+    padding: 20px 30px;
+}
+
+/* Items Table */
+.items-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(126, 126, 126, 0.2);
+    font-family: "Manjari", sans-serif;
+}
+
+.items-table thead tr {
+    background-color: #9F0000;
+    color: #ffffff;
+}
+
+.items-table th {
+    padding: 14px 12px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.items-table tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.items-table tbody tr:nth-child(even) {
+    background-color: #f0f8ff;
+}
+
+.items-table tbody tr:hover {
+    background-color: #e8f4ff;
+}
+
+.items-table td {
+    padding: 12px;
+    font-size: 12px;
+    color: #333333;
+    border-bottom: 1px solid rgba(126, 126, 126, 0.1);
+}
+
+/* Item Name Cell with Image */
+.item-name-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.item-thumbnail {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+.item-thumbnail-placeholder {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    background: linear-gradient(145deg, #f5e6d3, #e8d4c0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: #999999;
+    font-family: "Manjari", sans-serif;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.description-cell {
+    color: #757575;
+    max-width: 200px;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.edit-btn {
+    padding: 5px 12px;
+    border: 1px solid #4a90e2;
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: #4a90e2;
+    font-family: "Manjari", sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.edit-btn:hover {
+    background-color: #4a90e2;
+    color: #ffffff;
+}
+
+.delete-btn {
+    padding: 5px 12px;
+    border: 1px solid #e74c3c;
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: #e74c3c;
+    font-family: "Manjari", sans-serif;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.delete-btn:hover {
+    background-color: #e74c3c;
+    color: #ffffff;
+}
+
+/* No Data */
+.no-data {
+    text-align: center;
+    padding: 40px;
+    color: #999999;
+}
+
+/* Back Link */
+.back-link {
+    padding: 20px 30px;
+}
+
+.back-link a {
+    font-family: "Manjari", sans-serif;
+    font-size: 13px;
+    color: #4a90e2;
+    text-decoration: none;
+}
+
+.back-link a:hover {
+    text-decoration: underline;
+}
+
+/* Low Stock Warning */
+.low-stock-warning {
+    padding: 8px 15px;
+    background-color: #fff3e0;
+    border: 1px solid #ffcc80;
+    border-radius: 5px;
+    color: #e65100;
+    font-family: "Manjari", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* Stock Level Bar */
+.stock-level-bar {
+    width: 100px;
+    height: 8px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.stock-level-fill {
+    height: 100%;
+    background-color: #e74c3c;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.stock-percentage {
+    font-family: "Manjari", sans-serif;
+    font-size: 12px;
+    color: #e74c3c;
+    font-weight: 700;
+}
+
+/* Status Badge */
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-family: "Manjari", sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+}
+
+.status-low {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+/* No Low Stock Message */
+.no-low-stock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+}
+
+.no-low-stock-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.no-low-stock p {
+    font-family: "Manjari", sans-serif;
+    font-size: 14px;
+    color: #2e7d32;
+    margin: 0;
+}

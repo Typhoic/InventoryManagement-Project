@@ -1,0 +1,491 @@
+/* Page Title Section */
+.page-title-section {
+    background-color: #F3F3F3;
+    padding: 20px 30px;
+    margin-top: 55px;
+    border-bottom: 1px solid rgba(126, 126, 126, 0.2);
+}
+
+.page-title-section h1 {
+    font-family: "Manjari", sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    margin: 0;
+    color: #000000;
+}
+
+/* Form Container */
+.form-container {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 0 30px;
+}
+
+/* Alert Messages */
+.alert {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.alert-error {
+    background-color: #fdecea;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
+.alert ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.alert li {
+    font-family: "Manjari", sans-serif;
+    font-size: 13px;
+}
+
+/* Form Groups */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.form-group.half {
+    flex: 1;
+}
+
+.form-label {
+    display: block;
+    font-family: "Manjari", sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: #333333;
+    margin-bottom: 8px;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #d0d0d0;
+    border-radius: 8px;
+    font-family: "Manjari", sans-serif;
+    font-size: 13px;
+    color: #333333;
+    transition: border-color 0.2s ease;
+    box-sizing: border-box;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: #4a90e2;
+}
+
+.form-textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.form-input-file {
+    font-family: "Manjari", sans-serif;
+    font-size: 13px;
+}
+
+.form-hint {
+    display: block;
+    font-family: "Manjari", sans-serif;
+    font-size: 11px;
+    color: #888888;
+    margin-top: 5px;
+}
+
+/* Radio Group */
+.radio-group {
+    display: flex;
+    gap: 20px;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.radio-option input[type="radio"] {
+    display: none;
+}
+
+.radio-custom {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #d0d0d0;
+    border-radius: 50%;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.radio-option input[type="radio"]:checked + .radio-custom {
+    border-color: #4a90e2;
+}
+
+.radio-option input[type="radio"]:checked + .radio-custom::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background-color: #4a90e2;
+    border-radius: 50%;
+}
+
+.radio-label {
+    font-family: "Manjari", sans-serif;
+    font-size: 13px;
+    color: #333333;
+}
+
+/* Channel Options (for Orders) */
+.channel-options {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.channel-option {
+    cursor: pointer;
+}
+
+.channel-option input[type="radio"] {
+    display: none;
+}
+
+.channel-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+.channel-option input[type="radio"]:checked + .channel-box {
+    border-color: #4a90e2;
+    background-color: #f0f8ff;
+}
+
+.channel-icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.channel-name {
+    font-family: "Manjari", sans-serif;
+    font-size: 12px;
+    color: #333333;
+    text-align: center;
+}
+
+/* Form Section */
+.form-section {
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 25px 0;
+}
+
+.form-section-title {
+    font-family: "Manjari", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: #333333;
+    margin: 0 0 5px 0;
+}
+
+.form-section-hint {
+    font-family: "Manjari", sans-serif;
+    font-size: 12px;
+    color: #888888;
+    margin: 0 0 15px 0;
+}
+
+/* Recipe Row */
+.recipe-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+}
+
+.recipe-select {
+    flex: 2;
+}
+
+.recipe-quantity {
+    flex: 1;
+}
+
+.recipe-unit {
+    width: 60px;
+}
+
+.unit-label {
+    font-family: "Manjari", sans-serif;
+    font-size: 12px;
+    color: #888888;
+}
+
+.recipe-remove-btn {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: #e74c3c;
+    color: #ffffff;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.recipe-remove-btn:hover {
+    background-color: #c0392b;
+}
+
+.add-recipe-btn,
+.add-item-btn {
+    padding: 10px 20px;
+    border: 2px dashed #4a90e2;
+    border-radius: 8px;
+    background-color: transparent;
+    color: #4a90e2;
+    font-family: "Manjari", sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.add-recipe-btn:hover,
+.add-item-btn:hover {
+    background-color: #f0f8ff;
+}
+
+/* Order Item Row */
+.order-item-row {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 15px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+}
+
+.order-item-select {
+    flex: 2;
+}
+
+.order-item-quantity {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.order-item-quantity label {
+    font-family: "Manjari", sans-serif;
+    font-size: 12px;
+    color: #666666;
+}
+
+.quantity-input {
+    width: 70px !important;
+    text-align: center;
+}
+
+.order-item-price {
+    min-width: 120px;
+    text-align: right;
+}
+
+.item-price {
+    font-family: "Manjari", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #333333;
+}
+
+.order-item-remove {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: #e74c3c;
+    color: #ffffff;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.order-item-remove:hover {
+    background-color: #c0392b;
+}
+
+/* Order Summary */
+.order-summary {
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 25px 0;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+}
+
+.summary-row.total {
+    border-top: 2px solid #e0e0e0;
+    margin-top: 10px;
+    padding-top: 15px;
+}
+
+.summary-label {
+    font-family: "Manjari", sans-serif;
+    font-size: 14px;
+    color: #666666;
+}
+
+.summary-row.total .summary-label {
+    font-weight: 700;
+    color: #333333;
+}
+
+.summary-value {
+    font-family: "Manjari", sans-serif;
+    font-size: 14px;
+    color: #333333;
+}
+
+.summary-row.total .summary-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: #9F0000;
+}
+
+/* Type Badge */
+.type-badge {
+    display: inline-block;
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-family: "Manjari", sans-serif;
+    font-size: 13px;
+}
+
+.type-product {
+    background-color: #e3f2fd;
+    color: #1565c0;
+}
+
+.type-ingredient {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+/* Current Image */
+.current-image {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.current-image img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.current-image span {
+    font-family: "Manjari", sans-serif;
+    font-size: 12px;
+    color: #888888;
+}
+
+/* Stock Info */
+.stock-info {
+    display: flex;
+    gap: 20px;
+    padding: 12px 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.stock-info span {
+    font-family: "Manjari", sans-serif;
+    font-size: 13px;
+    color: #666666;
+}
+
+/* Form Actions */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.btn-cancel {
+    padding: 12px 30px;
+    border: 1px solid #d0d0d0;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #666666;
+    font-family: "Manjari", sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-cancel:hover {
+    background-color: #CD1C18;
+    color: white;
+}
+
+.btn-submit {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    background-color: #50C878;
+    color: #ffffff;
+    font-family: "Manjari", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-submit:hover {
+    background-color: #0BDA51;
+}

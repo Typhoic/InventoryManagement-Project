@@ -1,0 +1,208 @@
+/* Page Title Section */
+.page-title-section {
+    background-color: #F3F3F3;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 55px;
+    border-bottom: 1px solid rgba(126, 126, 126, 0.2);
+}
+
+.page-title-section h1 {
+    font-family: "Manjari", sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    margin: 0;
+    color: #000000;
+}
+
+.back-btn {
+    padding: 8px 20px;
+    border: 1px solid #d0d0d0;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #5a5a5a;
+    font-family: "Manjari", sans-serif;
+    font-size: 12px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+    background-color: #f0f8ff;
+    border-color: #4a90e2;
+    color: #4a90e2;
+}
+
+/* Order Details Container */
+.order-details-container {
+    padding: 30px;
+    max-width: 800px;
+}
+
+/* Order Info Card */
+.order-info-card,
+.order-items-card {
+    background-color: #ffffff;
+    border: 1px solid rgba(126, 126, 126, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.order-info-card h2,
+.order-items-card h2 {
+    font-family: "Manjari", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    margin: 0 0 20px 0;
+    color: #000000;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(126, 126, 126, 0.1);
+}
+
+/* Info Grid */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.info-label {
+    font-family: "Manjari", sans-serif;
+    font-size: 12px;
+    color: #757575;
+}
+
+.info-value {
+    font-family: "Manjari", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #333333;
+}
+
+/* Channel Badge */
+.channel-badge {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.channel-dine_in {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.channel-go_food {
+    background-color: #fff3e0;
+    color: #e65100;
+}
+
+.channel-grab_food {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.channel-catering {
+    background-color: #e3f2fd;
+    color: #1565c0;
+}
+
+/* Status Badge */
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.status-pending {
+    background-color: #fff3e0;
+    color: #e65100;
+}
+
+.status-completed {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.status-cancelled {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+/* Order Items Table */
+.order-items-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: "Manjari", sans-serif;
+}
+
+.order-items-table th {
+    background-color: #f3f3f3;
+    padding: 12px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 700;
+    color: #333333;
+    border-bottom: 1px solid rgba(126, 126, 126, 0.2);
+}
+
+.order-items-table td {
+    padding: 12px;
+    font-size: 13px;
+    color: #333333;
+    border-bottom: 1px solid rgba(126, 126, 126, 0.1);
+}
+
+.order-items-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.order-items-table tfoot tr {
+    background-color: #f3f3f3;
+}
+
+.order-items-table .total-label {
+    text-align: right;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.order-items-table .total-value {
+    font-weight: 700;
+    font-size: 14px;
+    color: #9F0000;
+}
+
+/* Order Actions */
+.order-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.delete-btn {
+    padding: 10px 25px;
+    border: 1px solid #e74c3c;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #e74c3c;
+    font-family: "Manjari", sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.delete-btn:hover {
+    background-color: #e74c3c;
+    color: #ffffff;
+}

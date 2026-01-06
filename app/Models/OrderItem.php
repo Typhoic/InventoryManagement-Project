@@ -17,4 +17,19 @@ class OrderItem extends Model
     {
         return $this->belongsTo(MenuItem::class);
     }
+
+    // Auto reduce ingredients when order item is created
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($orderItem) {
+            $menuItem = $orderItem->menuItem;
+
+            foreach ($menuItem->ingredients as $ingredient) {
+                $totalReduction = $ingredient->pivot->quantity_used * $orderItem->quantity;
+                $ingredient->reduceStock($totalReduction);
+            }
+        });
+    }
 }

@@ -26,6 +26,12 @@ class Ingredient extends Model
             ->withTimestamps();
     }
 
+    // Scope - for querying multiple ingredients
+    public function scopeLowStock($query)
+    {
+        return $query->whereRaw('(current_stock / initial_stock * 100) <= low_stock_threshold');
+    }
+
     // Check if ingredient is low stock
     public function isLowStock()
     {
@@ -38,5 +44,22 @@ class Ingredient extends Model
     {
         if ($this->initial_stock == 0) return 0;
         return ($this->current_stock / $this->initial_stock) * 100;
+    }
+
+    // Reduce stock when order is made
+    public function reduceStock(float $amount): void
+    {
+        $this->current_stock = max(0, $this->current_stock - $amount);
+        $this->save();
+    }
+
+    // Add stock when restocking
+    public function addStock(float $amount): void
+    {
+        $this->current_stock += $amount;
+        if ($this->current_stock > $this->initial_stock) {
+            $this->initial_stock = $this->current_stock;
+        }
+        $this->save();
     }
 }

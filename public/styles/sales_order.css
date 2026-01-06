@@ -1,0 +1,90 @@
+.salesorder {
+    width: 100%;
+    border-collapse: separate; 
+    border-spacing: 0; 
+    border-radius: 10px; 
+    overflow: hidden;
+    border: 1px solid rgba(126, 126, 126, 0.2);   
+    font-family: "Manjari", sans-serif;
+    
+}
+
+.section-title-link {
+    text-decoration: none;
+    color: #000000;
+    font-family: "Manjari", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.section-title-link:hover {
+    color: #4a90e2;
+}
+
+.salesorder th {
+    background-color: #f3f3f3;
+    text-align: left;
+    padding: 16px 8px;
+    position: relative;
+    font-family: "Manjari", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.filter-buttons {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 6px;
+}
+
+.filter-btn {
+    padding: 4px 12px;
+    border: 1px solid #d0d0d0;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #5a5a5a;
+    font-family: "Manjari", sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    background-color: #f0f8ff;
+    border-color: #4a90e2;
+}
+
+.filter-btn.active {
+    background-color: #4a90e2;
+    color: #ffffff;
+    border-color: #4a90e2;
+}
+
+.salesorder tr:nth-child(2) {
+    background-color: #f0f8ff;
+    color: #5a5a5a;
+    font-family: "Manjari", sans-serif; 
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.salesorder tr:nth-child(2) td {
+    padding: 6px 8px; 
+    text-align: left;
+}
+
+.salesorder tr:nth-child(3) {
+    background-color: #ffffff;
+    font-family: "Manjari", sans-serif; 
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.salesorder tr:nth-child(3) td {
+    padding: 8px 8px 60px 8px; 
+    color: #979797;
+}

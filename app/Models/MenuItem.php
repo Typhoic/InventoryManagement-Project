@@ -26,4 +26,22 @@ class MenuItem extends Model
             ->withPivot('quantity_used')
             ->withTimestamps();
     }
+
+    // Scope for active menu items
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
+
+    // Check if all ingredients are available
+    public function canMake(int $quantity = 1): bool
+    {
+        foreach ($this->ingredients as $ingredient) {
+            $needed = $ingredient->pivot->quantity_used * $quantity;
+            if ($ingredient->current_stock < $needed) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
