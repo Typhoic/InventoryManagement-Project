@@ -1,0 +1,71 @@
+Local setup & access guide
+
+1) Start XAMPP (for Apache + MySQL)
+   - Open the XAMPP Control Panel (XAMPP Control Panel.exe).
+   - Click the "Start" button next to **Apache**. The button turns green and the status will show "Running".
+   - Click the "Start" button next to **MySQL**. The button turns green and the status will show "Running".
+   - (Optional) Click the **Admin** button next to MySQL to open phpMyAdmin.
+
+2) Create the database (if not present)
+   - In phpMyAdmin: click "New" then enter a database name (e.g., inventorymanagement_web) and click "Create".
+   - Ensure DB name matches `DB_DATABASE` in your `.env` file.
+
+3) Configure environment (.env)
+   - Copy `.env.example` to `.env` if not present: `copy .env.example .env` (Windows PowerShell/CMD).
+   - Open `.env` and set database values:
+       DB_CONNECTION=mysql
+       DB_HOST=127.0.0.1
+       DB_PORT=3306
+       DB_DATABASE=inventorymanagement_web
+       DB_USERNAME=root
+       DB_PASSWORD=      <-- set if you have one (default XAMPP MySQL password is blank)
+
+4) Install PHP dependencies
+   - In project root (where `composer.json` is):
+       composer install
+   - Generate app key:
+       php artisan key:generate
+
+5) Install Node dependencies (if you need front-end build)
+   - npm install
+   - npm run dev  (or `npm run build` for production)
+
+6) Migrate & seed the database
+   - Run migrations:
+       php artisan migrate
+   - Seed (adds admin user):
+       php artisan db:seed --class=UserSeeder
+   - Alternatively, run the full seeder chain:
+       php artisan db:seed
+
+7) Start the app
+   Option A - Artisan dev server (recommended for development):
+       php artisan serve --host=127.0.0.1 --port=8000
+       Open in browser: http://127.0.0.1:8000
+
+   Option B - Run under Apache (XAMPP)
+       - Copy or configure your Apache virtual host to point to the `public` folder of the project.
+       - Place project in XAMPP `htdocs` or configure a VirtualHost that maps to the project's `public` directory.
+       - Restart Apache and open http://localhost/your-path (or your configured host).
+
+8) Default dev admin credentials (seeded by `UserSeeder`)
+   - Username: admin
+   - Password: password
+
+9) Troubleshooting
+   - If you get a database error, confirm MySQL is running in XAMPP and that `.env` DB values are correct.
+   - If the site shows a 500 error, check logs: `storage/logs/laravel.log` for details.
+   - For port conflicts with Apache, either stop the blocking app/service or change the port (e.g., use `php artisan serve` on a different port).
+   - Windows Firewall can block Apache: if Apache fails to start, allow it through the firewall or change ports.
+
+10) Useful commands
+   - Start server: `php artisan serve` (development)
+   - Run migrations: `php artisan migrate`
+   - Seed users: `php artisan db:seed --class=UserSeeder`
+   - Show logs: `tail -n 80 storage/logs/laravel.log` (or open the file in an editor)
+
+Notes
+   - This project expects PHP, Composer, Node.js/npm, and XAMPP installed on your machine.
+   - Keep the `.env` file private and do not commit it to version control.
+
+If you'd like, I can add these instructions to the repository README.md and link to where you can click the "Admin" or "Start" buttons in XAMPP with a screenshot (if you want screenshots added).

@@ -97,9 +97,29 @@ A comprehensive web-based inventory management application built with **Laravel 
    ```
 
 9. **Start the development server**
+
+   Option A - Artisan dev server (recommended for development):
    ```bash
-   php artisan serve
+   php artisan serve --host=127.0.0.1 --port=8000
    ```
+   Open in browser: http://127.0.0.1:8000
+
+   Option B - Using XAMPP (Apache + MySQL):
+   - Open the XAMPP Control Panel and click the **Start** button next to **Apache** and **MySQL** (buttons will turn green when running).
+
+   ![XAMPP Control Panel](public/images/xampp_control_panel.svg)
+   *Click the green **Start** buttons next to Apache and MySQL to run services.*
+
+   - (Optional) Click the **Admin** button next to MySQL to open phpMyAdmin.
+   - Configure an Apache VirtualHost pointing to the project's `public` folder (or place the project in XAMPP's `htdocs`).
+   - Restart Apache and open http://localhost/your-path (or your configured host).
+
+**Local dev credentials** (seeded by `UserSeeder`)
+
+- Username: `admin`
+- Password: `password`
+
+For a full step-by-step guide including XAMPP button instructions, database setup, migrations, and seeding, see `LOCAL_SETUP.txt` in the project root.
 
 ## 🗂️ Project Structure
 

@@ -16,11 +16,7 @@
 </head>
 <body>
     <!-- Header Section -->
-    <header class="header">
-        <div class="leftsection">
-            <img class="logoheader logo-clickable" src="{{ asset('images/ccb_logo_notext.svg') }}" onclick="openSidebar()">
-        </div>
-    </header>
+    @include('partials.header')
 
     <!-- Include Sidebar -->
     @include('partials.sidebar')

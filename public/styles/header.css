@@ -27,3 +27,26 @@
 .logoheader {
     height: 53px;
 }
+
+.right-section {
+    display: flex;
+    align-items: center;
+    padding-right: 16px;
+}
+
+.auth-btn {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.18);
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.auth-link {
+    color: #fff;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.18);
+    padding: 6px 10px;
+    border-radius: 6px;
+}
